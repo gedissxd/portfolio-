@@ -1,7 +1,7 @@
 <?php
 require "database/db.php";
 require "views/index.view.php";
-
+require "database/data.php";
 function test_input($data)
 {
     $data = trim($data);
@@ -23,3 +23,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $sql);
 
 }
+
