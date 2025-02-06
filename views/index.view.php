@@ -10,22 +10,22 @@
 <h1 class="font-bold text-3xl flex justify-center items-center mt-5">
   Leave a comment
 </h1>
-<form  method="POST" class="mx-auto w-2xl mt-10">
+<?php require "components/form-input.php" ?>
 
- <div class="flex justify-between">
- <label class="p-2">Email*</label> <input class="border-1 border-gray-400 rounded-md p-2" type="text" name="name">
- <label class="p-2">Name*</label> <input class="border-1 border-gray-400 rounded-md p-2" type="text" name="email">
- </div>
-
-<div class="flex mt-3">
-    <label class="p-2 mr-4 mt-7">Comment*</label>
-    <textarea class="border-1 border-gray-400 h-32 w-full rounded-md" type="text" name="comment"></textarea>
+<div>
+  <h1 class="text-2xl w-2xl mx-auto mt-12">2 Comments</h1>
 </div>
-<input class="bg-gray-400 px-4 py-2 rounded-md mt-3 ml-27" type="submit">
+
+
+<div class="mb-5 w-2xl mx-auto bg-white rounded-md">
+<?php require "components/comment.php"; ?>
+</div>
+<?php require "components/form-input.php" ?>
+<div class="mb-5 w-2xl mx-auto bg-white rounded-md">
+<?php require "components/comment.php"; ?>
+</div>
 
 
 
-
-</form>
 </body>
 </html>
