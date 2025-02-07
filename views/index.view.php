@@ -12,7 +12,10 @@
   <h1 class="font-bold text-3xl flex justify-center items-center mt-5">
     Leave a comment
   </h1>
-  <?php require "components/form-input.php" ?>
+  <div class="w-2xl mx-auto">
+
+    <?php require "components/form-input.php" ?>
+  </div>
 
   <div>
     <h1 class="text-2xl w-2xl mx-auto mt-12"><?php echo count($commentList); ?> Comments</h1>
@@ -23,8 +26,6 @@
       <?php require "components/comment.php"; ?>
     </div>
   <?php endforeach; ?>
-
-
 
 </body>
 
