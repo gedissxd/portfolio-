@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./output.css" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="bg-gray-300">
@@ -24,8 +25,7 @@
   <?php foreach ($commentList as $comment): ?>
     <?php if (!$comment['parent_id']): ?>
       <div class="mt-3 mb-5 w-2xl mx-auto">
-        <?php
-        require "components/comment.php";
+        <?php require "components/comment.php";
         $replies = array_filter($commentList, function ($reply) use ($comment) {
           return $reply['parent_id'] == $comment['id'];
         });
