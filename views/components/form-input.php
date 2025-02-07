@@ -1,17 +1,24 @@
-<form method="POST" class="mx-auto w-2xl mt-10" action="index.php">
+<form method="POST" class="p-4 rounded-md" action="index.php">
+    <div class="flex flex-col space-y-4">
+        <div class="flex justify-between w-full">
+            <div class="flex mr-4">
+                <label class="mb-1 p-2">Email*</label>
+                <input class="border border-gray-400 rounded-md p-2" type="text" name="email" required>
+            </div>
+            <div class="flex ">
+                <label class="mb-1 p-2">Name*</label>
+                <input class="border border-gray-400 rounded-md p-2" type="text" name="name" required>
+            </div>
+        </div>
 
-    <div class="flex justify-between">
-        <label class="p-2">Email*</label> <input class="border-1 border-gray-400 rounded-md p-2" type="text"
-            name="email" required>
-        <label class="p-2">Name*</label> <input class="border-1 border-gray-400 rounded-md p-2" type="text" name="name"
-            required>
+        <div class="">
+            <label class="mb-1">Comment*</label>
+            <textarea class="border border-gray-400 h-32 rounded-md p-2 w-full" name="comment" required></textarea>
+        </div>
+
+        <div class="flex justify-start">
+            <input class="bg-gray-400 px-4 py-2 rounded-md hover:bg-gray-600 cursor-pointer" type="submit"
+                value="Submit">
+        </div>
     </div>
-
-    <div class="flex mt-3">
-        <label class="p-2 mr-4 mt-7">Comment*</label>
-        <textarea class="border-1 border-gray-400 h-32 w-full rounded-md" type="text" name="comment"
-            required></textarea>
-    </div>
-    <input class="bg-gray-400 px-4 py-2 rounded-md mt-3 ml-27 hover:bg-gray-600" type="submit">
-
 </form>
