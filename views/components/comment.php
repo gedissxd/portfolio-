@@ -1,7 +1,7 @@
 <div class="p-4 rounded-lg space-y-4 bg-white">
   <div class="flex justify-between">
     <div class="flex">
-      <div class="font-bold mr-2"><?php echo $comment['name']; ?></div>
+      <div class="font-bold mr-2"><?= $comment['name']; ?></div>
       <div><?php echo date('d M Y', strtotime($comment['created_at'])); ?></div>
     </div>
     <?php if (!isset($comment['parent_id']) || $comment['parent_id'] == 0): ?>
@@ -18,7 +18,7 @@
     <h2><?php echo $comment['comment']; ?></h2>
   </div>
 
-  <div id="replyForm<?php echo $comment['id']; ?>" class="hidden mt-4">
+  <div id="replyForm <?= $comment['id']; ?>" class="hidden mt-4">
     <input type="hidden" name="parent_id" value="<?php echo $comment['id']; ?>">
     <?php require "views/components/form-input.php" ?>
   </div>
