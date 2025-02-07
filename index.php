@@ -1,6 +1,5 @@
 <?php
 require "database/db.php";
-require "views/index.view.php";
 require "database/data.php";
 function test_input($data)
 {
@@ -24,3 +23,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 
+require "views/index.view.php";

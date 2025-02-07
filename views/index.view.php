@@ -15,12 +15,14 @@
   <?php require "components/form-input.php" ?>
 
   <div>
-    <h1 class="text-2xl w-2xl mx-auto mt-12">2 Comments</h1>
+    <h1 class="text-2xl w-2xl mx-auto mt-12"><?php echo count($commentList); ?> Comments</h1>
   </div>
 
-  <div class="mb-5 w-2xl mx-auto bg-white rounded-md">
-    <?php require "components/comment.php"; ?>
-  </div>
+  <?php foreach ($commentList as $comment): ?>
+    <div class="mt-3 bg-white mb-5 w-2xl mx-auto space-y-4 p-4  rounded-md">
+      <?php require "components/comment.php"; ?>
+    </div>
+  <?php endforeach; ?>
 
 
 
