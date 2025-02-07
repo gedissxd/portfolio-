@@ -18,7 +18,7 @@
     <h2><?php echo $comment['comment']; ?></h2>
   </div>
 
-  <div id="replyForm <?= $comment['id']; ?>" class="hidden mt-4">
+  <div id="replyForm<?= $comment['id']; ?>" class="hidden mt-4">
     <input type="hidden" name="parent_id" value="<?php echo $comment['id']; ?>">
     <?php require "views/components/form-input.php" ?>
   </div>

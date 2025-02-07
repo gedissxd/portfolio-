@@ -1,4 +1,4 @@
-<form method="POST" class="rounded-md" action="index.php">
+<form method="POST" class="rounded-md" action="index.php" onsubmit="submitForm(event)">
     <div class="flex flex-col space-y-4">
         <div class="flex justify-between w-full">
             <div class="flex mr-4">
@@ -26,3 +26,25 @@
 <?php if (isset($error)): ?>
     <div class="text-red-600 mb-2"><?php echo $error; ?></div>
 <?php endif; ?>
+
+<script>
+    function submitForm(event) {
+        // Stop the normal form submission
+        event.preventDefault();
+
+        // Get the form data and send it
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Send the data to PHP
+        fetch('index.php', {
+            method: 'POST',
+            body: formData
+        })
+            // After PHP saves the comment, reload the page
+            .then(function () {
+                // This line refreshes the page
+                window.location.reload();
+            });
+    }
+</script>
