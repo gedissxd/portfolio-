@@ -1,4 +1,4 @@
-<div class="p-4 rounded-lg">
+<div class="p-4 rounded-lg space-y-4 bg-white">
   <div class="flex justify-between">
     <div class="flex">
       <div class="font-bold mr-2"><?php echo $comment['name']; ?></div>
@@ -16,7 +16,7 @@
     <h2><?php echo $comment['comment']; ?></h2>
   </div>
 
-  <div id="replyForm<?php echo $comment['id']; ?>" class="hidden">
+  <div id="replyForm<?php echo $comment['id']; ?>" class="hidden mt-4">
     <input type="hidden" name="parent_id" value="<?php echo $comment['id']; ?>">
     <?php require "views/components/form-input.php" ?>
   </div>

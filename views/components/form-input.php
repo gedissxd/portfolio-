@@ -1,4 +1,4 @@
-<form method="POST" class="p-4 rounded-md" action="index.php">
+<form method="POST" class="rounded-md" action="index.php">
     <div class="flex flex-col space-y-4">
         <div class="flex justify-between w-full">
             <div class="flex mr-4">

@@ -12,7 +12,7 @@
   <h1 class="font-bold text-3xl flex justify-center items-center mt-5">
     Leave a comment
   </h1>
-  <div class="w-2xl mx-auto">
+  <div class="w-2xl mx-auto mt-10">
 
     <?php require "components/form-input.php" ?>
   </div>
@@ -22,9 +22,22 @@
   </div>
 
   <?php foreach ($commentList as $comment): ?>
-    <div class="mt-3 bg-white mb-5 w-2xl mx-auto space-y-4 p-4  rounded-md">
-      <?php require "components/comment.php"; ?>
-    </div>
+    <?php if (!$comment['parent_id']): ?>
+      <div class="mt-3 mb-5 w-2xl mx-auto p-4">
+        <?php
+        require "components/comment.php";
+        $replies = array_filter($commentList, function ($reply) use ($comment) {
+          return $reply['parent_id'] == $comment['id'];
+        });
+        foreach ($replies as $reply):
+          ?>
+          <div class="ml-8 mt-8 bg-white rounded-md">
+            <?php $comment = $reply;
+            require "components/comment.php"; ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
   <?php endforeach; ?>
 
 </body>
