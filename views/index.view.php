@@ -23,7 +23,7 @@
 
   <?php foreach ($commentList as $comment): ?>
     <?php if (!$comment['parent_id']): ?>
-      <div class="mt-3 mb-5 w-2xl mx-auto p-4">
+      <div class="mt-3 mb-5 w-2xl mx-auto">
         <?php
         require "components/comment.php";
         $replies = array_filter($commentList, function ($reply) use ($comment) {

@@ -22,3 +22,7 @@
         </div>
     </div>
 </form>
+
+<?php if (isset($error)): ?>
+    <div class="text-red-600 mb-2"><?php echo $error; ?></div>
+<?php endif; ?>
