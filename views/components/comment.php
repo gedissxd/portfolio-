@@ -5,7 +5,8 @@
       <div><?php echo date("F j, Y, g:i a", strtotime($comment['created_at'])); ?></div>
     </div>
     <?php if (!isset($comment['parent_id']) || $comment['parent_id'] == 0): ?>
-      <div class="flex items-center cursor-pointer" onclick="showReplyForm(<?php echo $comment['id']; ?>)">
+      <div class="flex items-center cursor-pointer hover:scale-110 duration-200"
+        onclick="showReplyForm(<?php echo $comment['id']; ?>)">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-6 mr-1">
           <path stroke-linecap="round" stroke-linejoin="round" d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" />

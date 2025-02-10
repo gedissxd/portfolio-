@@ -14,7 +14,7 @@
 <body class="bg-gray-300">
   <div class="w-full max-w-2xl mx-auto mt-10 bg-white p-4 rounded-md sm:p-6 md:p-8">
 
-    <h1 class="font-bold text-3xl flex justify-center items-center mb-5">
+    <h1 class="font-bold text-3xl flex justify-center items-center mb-3">
       Leave a comment
     </h1>
 

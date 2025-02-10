@@ -24,8 +24,9 @@
         <?php endif; ?>
 
         <div class="flex justify-start">
-            <input class="bg-gray-400 px-4 py-2 rounded-md hover:bg-gray-600 cursor-pointer" type="submit"
-                value="Submit">
+            <input
+                class="bg-gray-400 px-4 py-2 rounded-md hover:bg-gray-600 cursor-pointer hover:scale-105 duration-200 ease-in-out"
+                type="submit" value="Submit">
         </div>
     </div>
 </form>
