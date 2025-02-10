@@ -1,17 +1,17 @@
 <form method="POST" class="rounded-md" action="index.php" onsubmit="submitForm(event)">
     <div class="flex flex-col space-y-4">
-        <div class="flex justify-between w-full">
-            <div class="flex mr-4">
-                <label class="mb-1 p-2">Email*</label>
-                <input class="border border-gray-400 rounded-md p-2" type="text" name="email" required>
+        <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+            <div class="flex flex-col flex-1">
+                <label class="mb-1">Email*</label>
+                <input class="border border-gray-400 rounded-md p-2 w-full" type="text" name="email" required>
             </div>
-            <div class="flex ">
-                <label class="mb-1 p-2">Name*</label>
-                <input class="border border-gray-400 rounded-md p-2" type="text" name="name" required>
+            <div class="flex flex-col flex-1">
+                <label class="mb-1">Name*</label>
+                <input class="border border-gray-400 rounded-md p-2 w-full" type="text" name="name" required>
             </div>
         </div>
 
-        <div class="">
+        <div class="flex flex-col">
             <label class="mb-1">Comment*</label>
             <textarea class="border border-gray-400 h-32 rounded-md p-2 w-full" name="comment" required></textarea>
         </div>
