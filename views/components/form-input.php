@@ -1,12 +1,12 @@
 <form method="POST" class="rounded-md" action="index.php" onsubmit="submitForm(event)">
     <div class="flex flex-col space-y-4">
-        <div class="flex flex-col sm:flex-row sm:justify-between w-full gap-4">
-            <div class="flex flex-col sm:flex-row sm:items-center">
-                <label class="mb-1 sm:mb-0 sm:mr-2">Email*</label>
+        <div class="flex justify-between w-full">
+            <div class="flex mr-4">
+                <label class="mb-1 p-2">Email*</label>
                 <input class="border border-gray-400 rounded-md p-2" type="text" name="email" required>
             </div>
-            <div class="flex flex-col sm:flex-row sm:items-center">
-                <label class="mb-1 sm:mb-0 sm:mr-2">Name*</label>
+            <div class="flex ">
+                <label class="mb-1 p-2">Name*</label>
                 <input class="border border-gray-400 rounded-md p-2" type="text" name="name" required>
             </div>
         </div>
