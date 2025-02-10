@@ -13,7 +13,7 @@
   <h1 class="font-bold text-3xl flex justify-center items-center mt-5">
     Leave a comment
   </h1>
-  <div class="w-2xl mx-auto mt-10">
+  <div class="w-full max-w-2xl px-4 mx-auto mt-10">
 
     <?php require "components/form-input.php" ?>
   </div>
