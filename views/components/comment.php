@@ -2,7 +2,7 @@
   <div class="flex justify-between">
     <div class="flex">
       <div class="font-bold mr-2"><?= $comment['name']; ?></div>
-      <div><?php echo date('d M Y', strtotime($comment['created_at'])); ?></div>
+      <div><?php echo date("F j, Y, g:i a", strtotime($comment['created_at'])); ?></div>
     </div>
     <?php if (!isset($comment['parent_id']) || $comment['parent_id'] == 0): ?>
       <div class="flex items-center cursor-pointer" onclick="showReplyForm(<?php echo $comment['id']; ?>)">

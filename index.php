@@ -1,6 +1,10 @@
 <?php
-require "database/db.php";
-require "database/data.php";
+require "Database.php";
+require "Comment.php";
+
+$db = new Database();
+$comments = new Comment($db);
+
 function test_input($data)
 {
     $data = trim($data);
@@ -8,36 +12,28 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $response = array();
+    $response = [];
 
-    $name = test_input($_POST["name"]);
-    $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
-    $comment = test_input($_POST["comment"]);
-    $parent_id = isset($_POST["parent_id"]) ? $_POST["parent_id"] : NULL;
+    $data = [
+        'name' => test_input($_POST["name"]),
+        'email' => filter_var($_POST["email"], FILTER_VALIDATE_EMAIL),
+        'comment' => test_input($_POST["comment"]),
+        'parent_id' => $_POST["parent_id"] ?? null
+    ];
 
-    if ($email === false) {
-        $response['status'] = 'error';
-        $response['message'] = "Please enter a valid email address";
-    } elseif (empty($name)) {
-        $response['status'] = 'error';
-        $response['message'] = "Please enter a valid name";
-    } elseif (empty($comment)) {
-        $response['status'] = 'error';
-        $response['message'] = "Please enter a valid comment";
+    if (!$data['email']) {
+        $error = "Invalid email address";
+    } elseif (empty($data['name'])) {
+        $error = "Name is required";
+    } elseif (empty($data['comment'])) {
+        $error = "Comment is required";
     } else {
-        $sql = "INSERT INTO komentaras (name, email, comment, parent_id) 
-        VALUES ('$name', '$email', '$comment', " . ($parent_id ? "'$parent_id'" : "NULL") . ")";
-        $result = mysqli_query($conn, $sql);
-
-        $response['status'] = 'success';
-        $response['message'] = 'Comment added successfully';
+        $comments->saveComment($data);
+        $response['success'] = "Comment added successfully";
     }
-
-    // Send JSON response
-    header('Content-Type: application/json');
-    echo json_encode($response);
-    exit;
 }
 
+$commentList = $comments->getAllComments();
 require "views/index.view.php";

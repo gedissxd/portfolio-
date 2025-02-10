@@ -1,4 +1,4 @@
-<form method="POST" class="rounded-md" action="index.php" onsubmit="submitForm(event)">
+<form method="POST" class="rounded-md" action="index.php" id="commentForm">
     <div class="flex flex-col space-y-4">
         <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
             <div class="flex flex-col flex-1">
@@ -13,7 +13,8 @@
 
         <div class="flex flex-col">
             <label class="mb-1">Comment*</label>
-            <textarea class="border border-gray-400 h-32 rounded-md p-2 w-full" name="comment" required></textarea>
+            <textarea class="border border-gray-400 h-32 rounded-md p-2 w-full resize-none" name="comment" required
+                maxlength="292"></textarea>
         </div>
 
         <?php if (isset($comment['id'])): ?>
@@ -30,40 +31,3 @@
 <?php if (isset($error)): ?>
     <div class="text-red-600 mb-2"><?php echo $error; ?></div>
 <?php endif; ?>
-
-<script>
-    function submitForm(event) {
-        // Stop the normal form submission
-        event.preventDefault();
-
-        // Get the form data and send it
-        const form = event.target;
-        const formData = new FormData(form);
-
-        // Clear any existing error messages
-        const existingError = form.querySelector('.text-red-600');
-        if (existingError) {
-            existingError.remove();
-        }
-
-        // Send the data to PHP
-        fetch(window.location.href, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // This line refreshes the page
-                    window.location.reload();
-                } else {
-                    // Show error message
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'text-red-600 mb-2';
-                    errorDiv.textContent = data.message;
-                    form.appendChild(errorDiv);
-                }
-            })
-
-    }
-</script>
