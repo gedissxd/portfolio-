@@ -34,7 +34,7 @@
         });
         foreach ($replies as $reply):
           ?>
-          <div class="ml-8 mt-8 bg-white rounded-md hover:scale-102 duration-300 ease-in-out sm:ml-0">
+          <div class="mr-8 mt-8 bg-white rounded-md hover:scale-102 duration-300 ease-in-out sm:mr-0 max-w-xl ml-auto">
             <?php $comment = $reply;
             require "components/comment.php"; ?>
           </div>
