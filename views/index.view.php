@@ -48,7 +48,7 @@
 
   <script>
     $(document).ready(function () {
-      $('.commentForm').on('submit', function (e) {
+      $(document).on('submit', '.commentForm', function (e) {
         e.preventDefault();
 
         const form = $(this);
@@ -65,7 +65,6 @@
           dataType: 'json',
           success: function (response) {
             if (response.success) {
-              // Update the comment count (ensure an element with id "comment-count" exists)
               $("#comment-count").text(response.commentCount + " Comments");
 
               // Show success message without reloading the page

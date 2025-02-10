@@ -8,9 +8,9 @@ class Database
     {
         $this->conn = new mysqli(
             'localhost',
-            'root',
-            '',
-            'komentarai'
+            'u161806173_gediminas',
+            'iBfaWW56',
+            'u161806173_komentarai'
         );
 
         if ($this->conn->connect_error) {
