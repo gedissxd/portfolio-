@@ -1,4 +1,4 @@
-<div class="p-4 rounded-lg space-y-4 bg-white">
+<div class="p-4 rounded-lg space-y-4 bg-white" data-comment-id="<?= $comment['id']; ?>">
   <div class="flex justify-between">
     <div class="flex">
       <div class="font-bold mr-2"><?= $comment['name']; ?></div>
@@ -15,7 +15,7 @@
     <?php endif; ?>
   </div>
   <div class="mt-2">
-    <h2><?php echo $comment['comment']; ?></h2>
+    <h2 class="break-words whitespace-normal overflow-wrap-anywhere"><?php echo $comment['comment']; ?></h2>
   </div>
 
   <div id="replyForm<?= $comment['id']; ?>" class="hidden mt-4">

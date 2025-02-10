@@ -1,13 +1,15 @@
-<form method="POST" class="rounded-md" action="index.php" id="commentForm">
+<form method="POST" class="commentForm rounded-md" action="index.php">
     <div class="flex flex-col space-y-4">
         <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
             <div class="flex flex-col flex-1">
                 <label class="mb-1">Email*</label>
-                <input class="border border-gray-400 rounded-md p-2 w-full" type="text" name="email" required>
+                <input class="border border-gray-400 rounded-md p-2 w-full" maxlength="30" type="text" name="email"
+                    required>
             </div>
             <div class="flex flex-col flex-1">
                 <label class="mb-1">Name*</label>
-                <input class="border border-gray-400 rounded-md p-2 w-full" type="text" name="name" required>
+                <input class="border border-gray-400 rounded-md p-2 w-full" maxlength="30" type="text" name="name"
+                    required>
             </div>
         </div>
 

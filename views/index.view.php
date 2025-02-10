@@ -22,7 +22,7 @@
   </div>
 
   <div>
-    <h1 class="text-2xl w-2xl mx-auto mt-12"><?php echo count($commentList); ?> Comments</h1>
+    <h1 class="text-2xl max-w-2xl mx-auto mt-5 mb-5" id="comment-count"><?php echo count($commentList); ?> Comments</h1>
   </div>
 
 
@@ -45,6 +45,81 @@
       <?php endif; ?>
     <?php endforeach; ?>
   </div>
+
+  <script>
+    $(document).ready(function () {
+      $('.commentForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const form = $(this);
+        const submitButton = form.find('input[type="submit"]');
+        const formData = form.serialize();
+
+        // Disable submit button while processing
+        submitButton.prop('disabled', true);
+
+        $.ajax({
+          type: 'POST',
+          url: 'index.php',
+          data: formData,
+          dataType: 'json',
+          success: function (response) {
+            if (response.success) {
+              // Update the comment count (ensure an element with id "comment-count" exists)
+              $("#comment-count").text(response.commentCount + " Comments");
+
+              // Show success message without reloading the page
+              const successDiv = $('<div>')
+                .addClass('text-green-600 mb-2')
+                .text(response.message);
+              form.prepend(successDiv);
+
+              // Clear the form inputs
+              form[0].reset();
+
+              // Dynamically insert the new comment HTML:
+              if (response.isReply) {
+                // Find the parent comment and append the reply after it
+                const parentComment = $("#comments-container").find(`[data-comment-id="${response.parentId}"]`).closest('.hover\\:scale-102');
+                $(response.commentHtml).insertAfter(parentComment);
+                // Hide the reply form after successful submission
+                $(`#replyForm${response.parentId}`).addClass('hidden');
+              } else {
+                // For top-level comments, prepend to the main comments container.
+                $("#comments-container").prepend(response.commentHtml);
+              }
+
+              // Remove success message after 3 seconds (optional)
+              setTimeout(() => {
+                successDiv.fadeOut(() => successDiv.remove());
+              }, 3000);
+            } else {
+              // Show error message in the form
+              const errorDiv = $('<div>')
+                .addClass('text-red-600 mb-2')
+                .text(response.error);
+              form.prepend(errorDiv);
+
+              // Remove error message after 3 seconds
+              setTimeout(() => {
+                errorDiv.fadeOut(() => errorDiv.remove());
+              }, 3000);
+            }
+          },
+          error: function (xhr, status, error) {
+            const errorDiv = $('<div>')
+              .addClass('text-red-600 mb-2')
+              .text('An error occurred while submitting the comment. Please try again.');
+            form.prepend(errorDiv);
+          },
+          complete: function () {
+            // Re-enable submit button
+            submitButton.prop('disabled', false);
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 
