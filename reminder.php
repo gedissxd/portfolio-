@@ -30,7 +30,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
 </head>
 
 <body class="bg-[#4C4E4F] overflow-y-scroll">
-    <?php require "../views/components/nav.php"; ?>
+    <?php require "views/components/nav.php"; ?>
     <div class="p-16">
         <div class="flex space-x-2">
             <a href="remindercreate.php">

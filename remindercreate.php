@@ -45,7 +45,7 @@ if ($formSubmitted) {
 </head>
 
 <body class="bg-[#4C4E4F]">
-    <?php require "../views/components/nav.php"; ?>
+    <?php require "views/components/nav.php"; ?>
     <div class="flex justify-center items-center mt-10">
         <?php if (!$formSubmitted || !empty($formErrors)): ?>
             <form class="bg-[#89985B] border-2 text-white rounded-2xl p-4 flex flex-col gap-4 w-[400px]" method="post">
