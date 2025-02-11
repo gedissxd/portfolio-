@@ -4,18 +4,20 @@ session_start();
 require_once 'database/data.php';
 require_once 'functions.php';
 
-if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
-    header('Location: login.php');
-    exit();
-}
-
-
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $personReminderID = $_GET['id'];
-    $sql = "SELECT * FROM `personreminder` WHERE personReminderID = $personReminderID";
-    $result = mysqli_query($conn, $sql);
-    $reminderList = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    $reminderList = $reminderList[0];
+    $personReminderID = intval($_GET['id']);
+    $stmt = $conn->prepare("SELECT * FROM `personreminder` WHERE personReminderID = ?");
+    $stmt->bind_param("i", $personReminderID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        header('Location: reminder.php');
+        exit();
+    }
+
+    $reminderList = $result->fetch_assoc();
+    $stmt->close();
 }
 
 
@@ -25,7 +27,7 @@ $message = "";
 $date = "";
 if ($formSubmitted) {
     if (isset($_POST['message']) && trim($_POST['message']) !== '') {
-        $message = $_POST['message'];
+        $message = trim($_POST['message']);
     } else {
         $formErrors['message'] = 'message cannot be empty.';
     }
@@ -36,16 +38,19 @@ if ($formSubmitted) {
     }
 
     if (empty($formErrors)) {
-        $stmt = $conn->prepare("UPDATE personreminder SET personReminder = ?,  personDate = ? WHERE personReminderID = $personReminderID");
-        $stmt->bind_param("ss", $message, $date);
-        $stmt->execute();
-        $stmt->close();
-        mysqli_close($conn);
-        header('Location: reminder.php');
-        exit();
+        $stmt = $conn->prepare("UPDATE personreminder SET personReminder = ?, personDate = ? WHERE personReminderID = ?");
+        $stmt->bind_param("ssi", $message, $date, $personReminderID);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            mysqli_close($conn);
+            header('Location: reminder.php');
+            exit();
+        } else {
+            $formErrors['database'] = 'Failed to update reminder';
+        }
     }
 }
-
 ?>
 
 
@@ -56,7 +61,7 @@ if ($formSubmitted) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Reminder</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="bg-[#4C4E4F]">
@@ -75,7 +80,8 @@ if ($formSubmitted) {
 
                 <div>
                     <input class="block w-full rounded-lg text-black bg-gray-200 p-2" type="date" name="date"
-                        min="<?= date('Y-m-d') ?>" value="<?= $reminderList['personDate'] ?>" />
+                        min="<?= date('Y-m-d') ?>"
+                        value="<?= isset($reminderList['personDate']) ? date('Y-m-d', strtotime($reminderList['personDate'])) : '' ?>" />
                     <?php if (isset($formErrors['date'])): ?>
                         <span class="text-red-600 text-sm mt-1 font-semibold"><?= $formErrors['date']; ?></span>
                     <?php endif; ?>
@@ -85,6 +91,7 @@ if ($formSubmitted) {
                     class="block w-full rounded-lg bg-gray-200 hover:bg-gray-300 text-black p-2 cursor-pointer">
             </form>
         <?php endif; ?>
+    </div>
 </body>
 
 </html>

@@ -12,7 +12,7 @@ require_once "functions.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="bg-[#4C4E4F] mt-12 p-16 text-white">

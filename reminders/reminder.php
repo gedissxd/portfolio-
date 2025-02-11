@@ -26,7 +26,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reminders</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="bg-[#4C4E4F] overflow-y-scroll">
@@ -104,7 +104,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
                             <?= $reminder['personReminder'] ?>
                         </p>
                         <div class="text-sm  mt-2 font-bold">
-                            <?= $reminder['personDate'] ?>
+                            <?= date('Y-m-d', strtotime($reminder['personDate'])) ?>
                         </div>
                     </div>
                 <?php endif; ?>

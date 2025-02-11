@@ -40,8 +40,8 @@ if ($formSubmitted) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration Form</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Create Reminder</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="bg-[#4C4E4F]">
@@ -49,7 +49,7 @@ if ($formSubmitted) {
     <div class="flex justify-center items-center mt-10">
         <?php if (!$formSubmitted || !empty($formErrors)): ?>
             <form class="bg-[#89985B] border-2 text-white rounded-2xl p-4 flex flex-col gap-4 w-[400px]" method="post">
-                <h1 class="text-3xl font-bold">Create account</h1>
+                <h1 class="text-3xl font-bold">Create Reminder</h1>
                 <div>
                     <textarea class="block w-full rounded-lg text-black bg-gray-200 p-2 resize-none" name="message"
                         placeholder="Reminder"><?= $message; ?></textarea>
