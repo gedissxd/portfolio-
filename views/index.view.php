@@ -7,7 +7,7 @@
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
-
+  <title>Comments</title>
 </head>
 
 <body
@@ -25,7 +25,8 @@
   </div>
 
   <div>
-    <h1 class="text-2xl max-w-2xl mx-auto mt-5 mb-5" id="comment-count"><?php echo count($commentList); ?> Comments</h1>
+    <h1 class="text-2xl max-w-2xl mx-auto mt-5 mb-5 text-white" id="comment-count"><?php echo count($commentList); ?>
+      Comments</h1>
   </div>
 
 
