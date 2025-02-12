@@ -2,7 +2,7 @@
 session_start();
 
 
-$userId = $_SESSION['user_id'];
+$userId = 1;
 
 require_once 'database/data.php';
 require_once 'functions.php';
@@ -51,7 +51,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
             <?php
 
             foreach ($reminderList as $reminder) {
-                if ($reminder['personID'] == $_SESSION['user_id']) {
+                if ($reminder['personID'] == $userId) {
                     $reminderDate = $reminder['personDate'];
                     $todayDate = date('Y-m-d');
 
@@ -65,7 +65,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
 
             ?>
             <?php foreach ($activeReminders as $reminder): ?>
-                <?php if ($reminder['personID'] == $_SESSION['user_id']): ?>
+                <?php if ($reminder['personID'] == $userId): ?>
                     <?php
                     $reminderDate = $reminder['personDate'];
                     $todayDate = date('Y-m-d');
@@ -127,6 +127,4 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
     </div>
 
 
-</body>
-
-</html>
+</body></html>

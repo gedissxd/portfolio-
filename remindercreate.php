@@ -8,7 +8,7 @@ $formErrors = [];
 $formSubmitted = isset($_POST['submit']);
 $message = "";
 $date = "";
-$userId = $_SESSION['user_id'];
+$userId = 1;
 if ($formSubmitted) {
     if (isset($_POST['message']) && trim($_POST['message']) !== '') {
         $message = $_POST['message'];
@@ -22,13 +22,21 @@ if ($formSubmitted) {
     }
 
     if (empty($formErrors)) {
-        $stmt = $conn->prepare("INSERT INTO personreminder (personReminder, personID, personDate) VALUES (?, ?, ?)");
-        $stmt->bind_param("sis", $message, $userId, $date);
-        $stmt->execute();
-        $stmt->close();
-        mysqli_close($conn);
-        header('Location: reminder.php');
-        exit();
+        try {
+            $stmt = $conn->prepare("INSERT INTO personreminder (personReminder, personID, personDate) VALUES (?, ?, ?)");
+            $stmt->bind_param("sis", $message, $userId, $date);
+            if (!$stmt->execute()) {
+                $formErrors['database'] = "Failed to create reminder: " . $stmt->error;
+            }
+            $stmt->close();
+            mysqli_close($conn);
+            if (empty($formErrors)) {
+                header('Location: reminder.php');
+                exit();
+            }
+        } catch (Exception $e) {
+            $formErrors['database'] = "Error: " . $e->getMessage();
+        }
     }
 }
 ?>
