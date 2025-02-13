@@ -1,7 +1,8 @@
-<div class="p-4 rounded-lg space-y-4 bg-white" data-comment-id="<?= $comment['id']; ?>">
+<div class="p-4 rounded-lg space-y-4 bg-[#121212] border border-[#2e2e2e] text-[#fafafa]"
+  data-comment-id="<?= $comment['id']; ?>">
   <div class="flex justify-between">
     <div class="flex">
-      <div class="font-bold mr-2"><?= $comment['name']; ?></div>
+      <div class="font-bold mr-2 "><?= $comment['name']; ?></div>
       <div><?php echo date("F j, Y, g:i a", strtotime($comment['created_at'])); ?></div>
     </div>
     <?php if (!isset($comment['parent_id']) || $comment['parent_id'] == 0): ?>

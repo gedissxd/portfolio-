@@ -52,11 +52,12 @@ if ($formSubmitted) {
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-[#4C4E4F]">
+<body class="bg-[#0f0f0f] ">
     <?php require "views/components/nav.php"; ?>
-    <div class="flex justify-center items-center mt-10">
+    <div class="flex justify-center items-center mt-10 p-10">
         <?php if (!$formSubmitted || !empty($formErrors)): ?>
-            <form class="bg-[#89985B] border-2 text-white rounded-2xl p-4 flex flex-col gap-4 w-[400px]" method="post">
+            <form class="bg-[#121212]  border  border-[#2e2e2e] text-white rounded-2xl p-4 flex flex-col gap-4 w-[400px]"
+                method="post">
                 <h1 class="text-3xl font-bold">Create Reminder</h1>
                 <div>
                     <textarea class="block w-full rounded-lg text-black bg-gray-200 p-2 resize-none" name="message"

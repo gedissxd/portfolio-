@@ -10,12 +10,12 @@
   <title>Comments</title>
 </head>
 
-<body
-  class="absolute top-0 z-[-2] h-screen w-full bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]">
+<body class="bg-[#0f0f0f] ">
 
   <?php require "components/nav.php" ?>
 
-  <div class="w-full max-w-2xl mx-auto mt-10 bg-white p-4 rounded-md sm:p-6 md:p-8">
+  <div
+    class="w-full max-w-2xl mx-auto mt-10 bg-[#121212]  border border-[#2e2e2e] text-white p-4 rounded-md sm:p-6 md:p-8">
 
     <h1 class="font-bold text-3xl flex justify-center items-center mb-3">
       Leave a comment
@@ -54,7 +54,7 @@
 
 </body>
 
-<footer class="bg-gray-400 h-30 mt-5 border-t border-white">
+<footer class=" h-15 mt-10 border-t w-7xl mx-auto border-[#2e2e2e]">
 </footer>
 
 </html>

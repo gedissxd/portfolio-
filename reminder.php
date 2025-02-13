@@ -29,18 +29,19 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-[#4C4E4F] overflow-y-scroll">
+<body class="bg-[#0f0f0f]  overflow-hidden">
     <?php require "views/components/nav.php"; ?>
     <div class="p-16">
         <div class="flex space-x-2">
             <a href="remindercreate.php">
-                <button class="bg-[#89985B] hover:bg-[#89985B]/90 text-white font-bold py-2 px-4 rounded">
+                <button
+                    class=" px-4 py-2 text-white rounded-md hover:bg-[#1f1f1f] border border-[#2e2e2e] cursor-pointer hover:scale-105 duration-200 ease-in-out">
                     Create Reminder
                 </button>
             </a>
             <form method="GET" action="reminder.php" class="">
                 <button type="submit" name="sort" value="closest"
-                    class="bg-[#89985B] hover:bg-[#89985B]/90 text-white font-bold py-2 px-4 rounded">
+                    class=" px-4 py-2 text-white rounded-md hover:bg-[#1f1f1f] border border-[#2e2e2e] cursor-pointer hover:scale-105 duration-200 ease-in-out">
                     Sort by Closest
                 </button>
             </form>
@@ -127,4 +128,6 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
     </div>
 
 
-</body></html>
+</body>
+
+</html>
