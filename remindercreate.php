@@ -52,7 +52,7 @@ if ($formSubmitted) {
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-[#0f0f0f] ">
+<body class="bg-[#0f0f0f]">
     <?php require "views/components/nav.php"; ?>
     <div class="flex justify-center items-center mt-10 p-10">
         <?php if (!$formSubmitted || !empty($formErrors)): ?>
@@ -60,23 +60,23 @@ if ($formSubmitted) {
                 method="post">
                 <h1 class="text-3xl font-bold">Create Reminder</h1>
                 <div>
-                    <textarea class="block w-full rounded-lg text-black bg-gray-200 p-2 resize-none" name="message"
-                        placeholder="Reminder"><?= $message; ?></textarea>
+                    <textarea class="block w-full rounded-lg text-white border  border-[#2e2e2e] p-2 resize-none"
+                        name="message" placeholder="Reminder"><?= $message; ?></textarea>
                     <?php if (isset($formErrors['message'])): ?>
                         <span class="text-red-600 text-sm mt-1 font-semibold"><?= $formErrors['message']; ?></span>
                     <?php endif; ?>
                 </div>
 
                 <div>
-                    <input class="block w-full rounded-lg text-black bg-gray-200 p-2" type="date" name="date"
+                    <input class="block w-full rounded-lg text-white border  border-[#2e2e2e] p-2" type="date" name="date"
                         min="<?= date('Y-m-d') ?>" value="<?= $date; ?>" />
                     <?php if (isset($formErrors['date'])): ?>
                         <span class="text-red-600 text-sm mt-1 font-semibold"><?= $formErrors['date']; ?></span>
                     <?php endif; ?>
                 </div>
 
-                <input type="submit" name="submit" value="Submit"
-                    class="block w-full rounded-lg bg-gray-200 hover:bg-gray-300 text-black p-2 cursor-pointer">
+                <input type="submit" name="submit" value="Create"
+                    class="border border-[#2e2e2e] block w-full rounded-lg  text-white hover:bg-[#1f1f1f] text-black p-2 cursor-pointer hover:scale-105 duration-200 ease-in-out">
             </form>
         <?php endif; ?>
     </div>

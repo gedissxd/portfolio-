@@ -74,34 +74,24 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
                     $earlier = new DateTime("$todayDate");
                     $later = new DateTime("$reminderDate");
 
-                    $pos_diff = $earlier->diff($later)->format("%r%a");
-                    $neg_diff = $later->diff($earlier)->format("%r%a");
-                    if ($pos_diff == 0) {
-                        $bgColor = 'bg-red-500';
-                    } elseif ($pos_diff == 1) {
-                        $bgColor = 'bg-yellow-500';
-                    } elseif ($pos_diff == 2) {
-                        $bgColor = 'bg-yellow-500';
-                    } elseif ($neg_diff > 0) {
-                        $bgColor = 'bg-red-500';
-                    } else {
-                        $bgColor = 'bg-[#89985B]';
-                    }
+
                     ?>
-                    <div class="<?= $bgColor ?>  text-white p-4 rounded-lg border-2">
+                    <div class="bg-[#121212]  text-white p-4 rounded-lg border border-[#2e2e2e]">
                         <div class="flex flex-row gap-2">
                             <a href="reminderedit.php?id=<?= $reminder['personReminderID'] ?>">
-                                <button class="text-blue-500 font-bold bg-gray-100 px-2 rounded">
+                                <button
+                                    class=" font-bold border border-[#2e2e2e] px-2 py-1 rounded cursor-pointer hover:bg-[#1f1f1f] hover:scale-105 duration-200 ease-in-out">
                                     EDIT
                                 </button>
                             </a>
                             <a href="reminderdelete.php?id=<?= $reminder['personReminderID'] ?>">
-                                <button class="text-red-500 font-bold bg-gray-100 px-2 rounded">
+                                <button
+                                    class=" font-bold border border-[#2e2e2e] px-2 py-1 rounded cursor-pointer hover:bg-[#1f1f1f] hover:scale-105 duration-200 ease-in-out">
                                     DELETE
                                 </button>
                             </a>
                         </div>
-                        <p class="text-lg font-semibold">
+                        <p class="text-lg font-semibold mt-2">
                             <?= $reminder['personReminder'] ?>
                         </p>
                         <div class="text-sm  mt-2 font-bold">
