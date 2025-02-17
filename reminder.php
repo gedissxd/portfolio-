@@ -105,7 +105,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
         <h2 class="mt-8 text-xl font-bold text-white">Archived Reminders</h2>
         <div class="grid grid-cols-3 gap-4 mt-4 mx-auto">
             <?php foreach ($archivedReminders as $reminder): ?>
-                <div class="bg-gray-500 text-white p-4 rounded-lg border-2">
+                <div class="bg-[#121212] text-white p-4 rounded-lg border border-[#2e2e2e]">
                     <p class="text-lg font-semibold">
                         <?= $reminder['personReminder'] ?>
                     </p>

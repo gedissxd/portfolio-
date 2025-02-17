@@ -10,7 +10,7 @@
   <title>Comments</title>
 </head>
 
-<body class="bg-[#0f0f0f] ">
+<body class="bg-[#0f0f0f] overflow-scroll-y overflow-hidden">
 
   <?php require "components/nav.php" ?>
 
