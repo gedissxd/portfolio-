@@ -8,54 +8,78 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
   <title>Comments</title>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 20px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f0f0f;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2e2e2e;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3e3e3e;
+    }
+
+    /* For Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #2e2e2e #0f0f0f;
+    }
+  </style>
 </head>
 
-<body class="bg-[#0f0f0f] overflow-scroll-y overflow-hidden">
+<body class="bg-[#0f0f0f]">
 
   <?php require "components/nav.php" ?>
 
-  <div
-    class="w-full max-w-2xl mx-auto mt-10 bg-[#121212]  border border-[#2e2e2e] text-white p-4 rounded-md sm:p-6 md:p-8">
+  <div class="h-[calc(100vh-64px)] overflow-y-auto" style="scrollbar-gutter: stable;">
+    <div
+      class="w-full max-w-2xl mx-auto mt-10 bg-[#121212]  border border-[#2e2e2e] text-white p-4 rounded-md sm:p-6 md:p-8">
 
-    <h1 class="font-bold text-3xl flex justify-center items-center mb-3">
-      Leave a comment
-    </h1>
+      <h1 class="font-bold text-3xl flex justify-center items-center mb-3">
+        Leave a comment
+      </h1>
 
-    <?php require "components/form-input.php" ?>
-  </div>
+      <?php require "components/form-input.php" ?>
+    </div>
 
-  <div>
-    <h1 class="text-2xl max-w-2xl mx-auto mt-5 mb-5 text-white" id="comment-count"><?php echo count($commentList); ?>
-      Comments</h1>
-  </div>
+    <div>
+      <h1 class="text-2xl max-w-2xl mx-auto mt-5 mb-5 text-white" id="comment-count"><?php echo count($commentList); ?>
+        Comments</h1>
+    </div>
 
-
-  <div id="comments-container" class="mt-3 space-y-4 w-full max-w-2xl mx-auto">
-    <?php foreach ($commentList as $comment): ?>
-      <?php if (!$comment['parent_id']): ?>
-        <div class="hover:scale-102 duration-200 ease-in-out">
-          <?php require "components/comment.php"; ?>
-        </div>
-        <?php
-        $replies = [];
-        foreach ($commentList as $reply) {
-          if ($reply['parent_id'] === $comment['id']) {
-            $replies[] = $reply;
+    <div id="comments-container" class="mt-3 space-y-4 w-full max-w-2xl mx-auto">
+      <?php foreach ($commentList as $comment): ?>
+        <?php if (!$comment['parent_id']): ?>
+          <div class="hover:scale-102 duration-200 ease-in-out">
+            <?php require "components/comment.php"; ?>
+          </div>
+          <?php
+          $replies = [];
+          foreach ($commentList as $reply) {
+            if ($reply['parent_id'] === $comment['id']) {
+              $replies[] = $reply;
+            }
           }
-        }
-        foreach ($replies as $reply):
-          require "components/reply.php";
-        endforeach; ?>
-      <?php endif; ?>
-    <?php endforeach; ?>
+          foreach ($replies as $reply):
+            require "components/reply.php";
+          endforeach; ?>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+
+    <footer class="h-15 mt-10 border-t w-7xl mx-auto border-[#2e2e2e]">
+    </footer>
   </div>
-
-
 
 </body>
-
-<footer class=" h-15 mt-10 border-t w-7xl mx-auto border-[#2e2e2e]">
-</footer>
 
 </html>
 
