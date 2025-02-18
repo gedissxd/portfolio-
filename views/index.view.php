@@ -51,8 +51,9 @@
     </div>
 
     <div>
-      <h1 class="text-2xl max-w-2xl mx-auto mt-5 mb-5 text-white" id="comment-count"><?php echo count($commentList); ?>
-        Comments</h1>
+      <h1 class="text-2xl max-w-2xl mx-auto mt-5 mb-5 text-white" id="comment-count">
+        <?php echo $pagination['total_items']; ?> Comments
+      </h1>
     </div>
 
     <div id="comments-container" class="mt-3 space-y-4 w-full max-w-2xl mx-auto">
@@ -73,6 +74,29 @@
           endforeach; ?>
         <?php endif; ?>
       <?php endforeach; ?>
+    </div>
+
+    <div class="flex justify-center gap-2 my-8">
+      <?php if ($pagination['has_previous']): ?>
+        <a href="?page=<?= $page - 1 ?>"
+          class="px-4 py-2 text-white rounded-md hover:bg-[#1f1f1f] border border-[#2e2e2e]">
+          Previous
+        </a>
+      <?php endif; ?>
+
+      <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+        <a href="?page=<?= $i ?>"
+          class="px-4 py-2 text-white rounded-md <?= $i === $page ? 'bg-[#1f1f1f]' : 'hover:bg-[#1f1f1f]' ?> border border-[#2e2e2e]">
+          <?= $i ?>
+        </a>
+      <?php endfor; ?>
+
+      <?php if ($pagination['has_next']): ?>
+        <a href="?page=<?= $page + 1 ?>"
+          class="px-4 py-2 text-white rounded-md hover:bg-[#1f1f1f] border border-[#2e2e2e]">
+          Next
+        </a>
+      <?php endif; ?>
     </div>
 
     <footer class="h-15 mt-10 border-t w-7xl mx-auto border-[#2e2e2e]">
@@ -104,6 +128,9 @@
           if (response.success) {
             $("#comment-count").text(response.commentCount + " Comments");
 
+            // If it's a new comment (not a reply), reload the first page
+
+
             // Show success message without reloading the page
             const successDiv = $('<div>')
               .addClass('text-green-600 mb-2')
@@ -120,9 +147,6 @@
               $(response.commentHtml).insertAfter(parentComment);
               // Hide the reply form after successful submission
               $(`#replyForm${response.parentId}`).addClass('hidden');
-            } else {
-              // For top-level comments, prepend to the main comments container.
-              $("#comments-container").prepend(response.commentHtml);
             }
 
             // Remove success message after 3 seconds (optional)
@@ -142,12 +166,6 @@
             }, 3000);
           }
         },
-        error: function (xhr, status, error) {
-          const errorDiv = $('<div>')
-            .addClass('text-red-600 mb-2')
-            .text('An error occurred while submitting the comment. Please try again.');
-          form.prepend(errorDiv);
-        },
         complete: function () {
           // Re-enable submit button
           submitButton.prop('disabled', false);
@@ -156,3 +174,11 @@
     });
   });
 </script>
+
+<?php
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$perPage = 10; // Adjust this number as needed
+$result = $comments->getCommentsByPage($page, $perPage);
+$commentList = $result['comments'];
+$pagination = $result['pagination'];
+?>

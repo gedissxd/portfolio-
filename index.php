@@ -5,6 +5,12 @@ require "Comment.php";
 $db = new Database();
 $comments = new Comment($db);
 
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$perPage = 20;
+$result = $comments->getCommentsByPage($page, $perPage);
+$commentList = $result['comments'];
+$pagination = $result['pagination'];
+
 function test_input($data)
 {
     $data = trim($data);
@@ -36,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = $db->getConnection()->query("SELECT * FROM komentaras WHERE id = {$lastId}");
             $newComment = $result->fetch_assoc();
 
-            // Render the comment HTML using your components:
+
             if (!$newComment['parent_id'] || $newComment['parent_id'] == 0) {
                 ob_start();
                 $comment = $newComment;
@@ -75,6 +81,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode($response);
     exit;
 }
-
-$commentList = $comments->getAllComments();
 require "views/index.view.php";
