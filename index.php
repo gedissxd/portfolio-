@@ -6,7 +6,7 @@ $db = new Database();
 $comments = new Comment($db);
 
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-$perPage = 20;
+$perPage = 10;
 $result = $comments->getCommentsByPage($page, $perPage);
 $commentList = $result['comments'];
 $pagination = $result['pagination'];
@@ -21,6 +21,44 @@ function test_input($data)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $response = [];
+
+    // Handle AJAX pagination request
+    if (isset($_POST['action']) && $_POST['action'] === 'get_page') {
+        $page = isset($_POST['page']) ? (int) $_POST['page'] : 1;
+        $perPage = 10;
+        $result = $comments->getCommentsByPage($page, $perPage);
+        
+        // Start output buffering to capture the HTML
+        ob_start();
+        foreach ($result['comments'] as $comment) {
+            if (!$comment['parent_id']) {
+                echo '<div>';
+                $replies = array_filter($result['comments'], function($reply) use ($comment) {
+                    return $reply['parent_id'] === $comment['id'];
+                });
+                require "views/components/comment.php";
+                echo '</div>';
+            }
+        }
+        $commentsHtml = ob_get_clean();
+
+        // Start output buffering for pagination
+        ob_start();
+        $pagination = $result['pagination'];
+        require "views/components/pagination.php";
+        $paginationHtml = ob_get_clean();
+
+        $response = [
+            'success' => true,
+            'commentsHtml' => $commentsHtml,
+            'paginationHtml' => $paginationHtml,
+            'totalItems' => $result['pagination']['total_items']
+        ];
+        
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
 
     $data = [
         'name' => test_input($_POST["name"]),
