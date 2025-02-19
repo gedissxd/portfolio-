@@ -59,19 +59,14 @@
     <div id="comments-container" class="mt-3 space-y-4 w-full max-w-2xl mx-auto">
       <?php foreach ($commentList as $comment): ?>
         <?php if (!$comment['parent_id']): ?>
-          <div class="hover:scale-102 duration-200 ease-in-out">
-            <?php require "components/comment.php"; ?>
+          <div>
+            <?php 
+            $replies = array_filter($commentList, function($reply) use ($comment) {
+              return $reply['parent_id'] === $comment['id'];
+            });
+            require "components/comment.php"; 
+            ?>
           </div>
-          <?php
-          $replies = [];
-          foreach ($commentList as $reply) {
-            if ($reply['parent_id'] === $comment['id']) {
-              $replies[] = $reply;
-            }
-          }
-          foreach ($replies as $reply):
-            require "components/reply.php";
-          endforeach; ?>
         <?php endif; ?>
       <?php endforeach; ?>
     </div>
@@ -115,6 +110,7 @@
       const form = $(this);
       const submitButton = form.find('input[type="submit"]');
       const formData = form.serialize();
+      const parentId = form.find('input[name="parent_id"]').val();
 
       // Disable submit button while processing
       submitButton.prop('disabled', true);
@@ -126,35 +122,39 @@
         dataType: 'json',
         success: function (response) {
           if (response.success) {
+            // Update comment count
             $("#comment-count").text(response.commentCount + " Comments");
 
-            // If it's a new comment (not a reply), reload the first page
-
-
-            // Show success message without reloading the page
+            // Show success message
             const successDiv = $('<div>')
               .addClass('text-green-600 mb-2')
               .text(response.message);
             form.prepend(successDiv);
 
-            // Clear the form inputs
+            // Clear the form
             form[0].reset();
 
-            // Dynamically insert the new comment HTML:
             if (response.isReply) {
-              // Find the parent comment and append the reply after it
-              const parentComment = $("#comments-container").find(`[data-comment-id="${response.parentId}"]`).closest('.hover\\:scale-102');
-              $(response.commentHtml).insertAfter(parentComment);
-              // Hide the reply form after successful submission
+              // Find the replies container for this parent comment
+              const repliesContainer = $(`.replies-container[data-parent-id="${response.parentId}"]`);
+              
+              // Append the new reply to the replies container
+              repliesContainer.append(response.commentHtml);
+              
+              // Hide the reply form
               $(`#replyForm${response.parentId}`).addClass('hidden');
+            } else {
+              // For new top-level comments, prepend to the comments container
+              const commentHtml = $(response.commentHtml);
+              $("#comments-container").prepend(commentHtml);
             }
 
-            // Remove success message after 3 seconds (optional)
+            // Remove success message after 3 seconds
             setTimeout(() => {
               successDiv.fadeOut(() => successDiv.remove());
             }, 3000);
           } else {
-            // Show error message in the form
+            // Show error message
             const errorDiv = $('<div>')
               .addClass('text-red-600 mb-2')
               .text(response.error);
@@ -165,6 +165,17 @@
               errorDiv.fadeOut(() => errorDiv.remove());
             }, 3000);
           }
+        },
+        error: function(xhr, status, error) {
+          console.error("AJAX Error:", status, error);
+          const errorDiv = $('<div>')
+            .addClass('text-red-600 mb-2')
+            .text('An error occurred while submitting your comment. Please try again.');
+          form.prepend(errorDiv);
+
+          setTimeout(() => {
+            errorDiv.fadeOut(() => errorDiv.remove());
+          }, 3000);
         },
         complete: function () {
           // Re-enable submit button

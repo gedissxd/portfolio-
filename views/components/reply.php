@@ -1,5 +1,4 @@
-<div
-    class="mr-8  text-white rounded-md  bg-[#121212] hover:scale-102 duration-300 ease-in-out sm:mr-0 max-w-xl ml-auto border border-[#2e2e2e]">
+<div class="mr-8 mt-3 text-white rounded-md bg-[#121212] hover:scale-102 duration-300 ease-in-out sm:mr-0 max-w-xl ml-auto border border-[#2e2e2e]" data-reply-id="<?= $reply['id']; ?>" data-parent-id="<?= $reply['parent_id']; ?>">
     <div class="p-4 rounded-lg space-y-4">
         <div class="flex justify-between">
             <div class="flex">

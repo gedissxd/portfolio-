@@ -61,7 +61,7 @@ if ($formSubmitted) {
                 <h1 class="text-3xl font-bold">Create Reminder</h1>
                 <div>
                     <textarea class="block w-full rounded-lg text-white border  border-[#2e2e2e] p-2 resize-none"
-                        name="message" placeholder="Reminder"><?= $message; ?></textarea>
+                        name="message" placeholder="Reminder" maxlength="255"><?= $message; ?></textarea>
                     <?php if (isset($formErrors['message'])): ?>
                         <span class="text-red-600 text-sm mt-1 font-semibold"><?= $formErrors['message']; ?></span>
                     <?php endif; ?>

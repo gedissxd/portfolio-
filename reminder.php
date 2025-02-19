@@ -29,9 +29,9 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-[#0f0f0f]  overflow-hidden">
+<body class="bg-[#0f0f0f]">
     <?php require "views/components/nav.php"; ?>
-    <div class="p-16">
+    <div class="p-4">
         <div class="flex space-x-2">
             <a href="remindercreate.php">
                 <button
@@ -48,7 +48,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
         </div>
 
 
-        <div class="grid grid-cols-3 gap-4 mt-4 mx-auto ">
+        <div class="grid sm:grid-cols-3 grid-cols-2 gap-2 mt-4 mx-auto">
             <?php
 
             foreach ($reminderList as $reminder) {
@@ -77,7 +77,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
 
                     ?>
                     <div class="bg-[#121212]  text-white p-4 rounded-lg border border-[#2e2e2e]">
-                        <div class="flex flex-row gap-2">
+                        <div class="flex flex-col sm:flex-row gap-2">
                             <a href="reminderedit.php?id=<?= $reminder['personReminderID'] ?>">
                                 <button
                                     class=" font-bold border border-[#2e2e2e] px-2 py-1 rounded cursor-pointer hover:bg-[#1f1f1f] hover:scale-105 duration-200 ease-in-out">
@@ -91,7 +91,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
                                 </button>
                             </a>
                         </div>
-                        <p class="text-lg font-semibold mt-2">
+                        <p class="text-lg font-semibold mt-2 break-words whitespace-normal overflow-wrap-anywhere">
                             <?= $reminder['personReminder'] ?>
                         </p>
                         <div class="text-sm  mt-2 font-bold">
@@ -105,7 +105,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
         <h2 class="mt-8 text-xl font-bold text-white">Archived Reminders</h2>
         <div class="grid grid-cols-3 gap-4 mt-4 mx-auto">
             <?php foreach ($archivedReminders as $reminder): ?>
-                <div class="bg-[#121212] text-white p-4 rounded-lg border border-[#2e2e2e]">
+                <div class="bg-[#121212] h-fit md:break-after-auto text-white p-4 rounded-lg border border-[#2e2e2e]">
                     <p class="text-lg font-semibold">
                         <?= $reminder['personReminder'] ?>
                     </p>
