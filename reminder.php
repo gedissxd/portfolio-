@@ -27,6 +27,10 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'closest') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reminders</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="icon"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/1200px-A_black_image.jpg"
+        type="image/x-icon" />
+
 </head>
 
 <body class="bg-[#0f0f0f]">

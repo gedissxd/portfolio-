@@ -67,6 +67,10 @@ if (!in_array("", $_SESSION['grid']) && !$_SESSION['winner'] && !$_SESSION['game
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-tac-toe</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="icon"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/1200px-A_black_image.jpg"
+        type="image/x-icon" />
+
 </head>
 
 <body class="bg-[#0f0f0f] h-screen">
@@ -88,7 +92,7 @@ if (!in_array("", $_SESSION['grid']) && !$_SESSION['winner'] && !$_SESSION['game
                 <?php for ($i = 0; $i <= 8; $i++): ?>
 
                     <button name="position" value="<?= $i ?>"
-                        class="bg-[#121212] hover:bg-[#121212]/50 h-[150px] border border-[#2e2e2e] w-[150px] rounded gap-3 text-center  font-bold text-3xl <?= isset($_SESSION['winCombo']) && ($_SESSION['winCombo'][0] === $i || $_SESSION['winCombo'][1] === $i || $_SESSION['winCombo'][2] === $i) ? 'text-[#772E25]' : 'text-[#FFFAFF]' ?>"
+                        class="bg-[#121212] hover:bg-[#121212]/50 h-[150px] border border-[#2e2e2e] w-[150px] rounded gap-3 text-center  font-bold text-3xl duration-200 ease-in-out hover:scale-101 <?= isset($_SESSION['winCombo']) && ($_SESSION['winCombo'][0] === $i || $_SESSION['winCombo'][1] === $i || $_SESSION['winCombo'][2] === $i) ? 'text-[#772E25]' : 'text-[#FFFAFF]' ?>"
                         <?= $_SESSION['gameOver'] || $_SESSION['grid'][$i] !== '' ? 'disabled' : '' ?>>
                         <?= $_SESSION['grid'][$i] ?>
                     </button>
@@ -98,7 +102,7 @@ if (!in_array("", $_SESSION['grid']) && !$_SESSION['winner'] && !$_SESSION['game
 
         <form method="get">
             <button name="reset"
-                class=" px-5 py-2 text-white rounded-md hover:bg-[#1f1f1f] border border-[#2e2e2e] cursor-pointer hover:scale-105 duration-200 ease-in-out mt-10">Reset</button>
+                class=" px-5 py-2 text-white rounded-md hover:bg-[#1f1f1f] border border-[#2e2e2e] cursor-pointer hover:scale-105 duration-200 ease-in-out mt-10 duration-200 easy-in-out">Reset</button>
         </form>
     </div>
 
