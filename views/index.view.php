@@ -25,7 +25,7 @@
   </div>
 
   <div
-    class="z-1 relative -mt-[150px] mx-auto max-w-[500px] border border-[#2e2e2e] bg-[#121212] rounded-md md:ml-[800px] sm:ml-[800px] p-5">
+    class="z-1 relative -mt-[150px] mx-auto max-w-[500px] border border-[#2e2e2e] bg-[#121212] rounded-md md:ml-[1200px] sm:ml-[800px] p-5">
     <h2 class="text-white flex justify-center items-center mb-10 text-xl font-bold mt-5 sm:text-2xl">
       Tools that I use to build my projects
     </h2>
