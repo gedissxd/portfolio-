@@ -27,13 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $page = isset($_POST['page']) ? (int) $_POST['page'] : 1;
         $perPage = 10;
         $result = $comments->getCommentsByPage($page, $perPage);
-        
+
         // Start output buffering to capture the HTML
         ob_start();
         foreach ($result['comments'] as $comment) {
             if (!$comment['parent_id']) {
                 echo '<div>';
-                $replies = array_filter($result['comments'], function($reply) use ($comment) {
+                $replies = array_filter($result['comments'], function ($reply) use ($comment) {
                     return $reply['parent_id'] === $comment['id'];
                 });
                 require "views/components/comment.php";
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'paginationHtml' => $paginationHtml,
             'totalItems' => $result['pagination']['total_items']
         ];
-        
+
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
